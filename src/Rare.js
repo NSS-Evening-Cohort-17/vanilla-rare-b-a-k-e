@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { Route, Redirect } from "react-router-dom"
-import { ApplicationViews } from "./ApplicationViews"
-import { NavBar } from "./nav/NavBar"
-import { Login } from "./auth/Login"
-import { Register } from "./auth/Register"
+import Routes from "./Routes"
+import { NavBar } from "./components/NavBar"
+import { Login } from "./components/auth/Login"
+import { Register } from "./components/auth/Register"
 
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem('token'))
@@ -19,7 +19,7 @@ export const Rare = () => {
         ?
         <Route>
           <NavBar token={token} setToken={setToken} />
-          <ApplicationViews />
+          <Routes />
         </Route>
         :
         <Redirect to="/login" />
