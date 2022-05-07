@@ -115,13 +115,16 @@
 
 // PostForm.defaultProps = { post: {} };
 
-import { React, useState } from "react"
+import { React, useRef, useState } from "react"
 import { addPost } from "../modules/PostManager";
 
 export const PostForm = () => {
 
+    const sessionUserId = localStorage.getItem("rare_userId")
+    const userId =  parseInt(sessionUserId)
+
     const [post, setPost] = useState({
-		user_id: 1,
+		user_id: userId,
         category_id: 1,
         title: "",
 		publication_date: Date.now(),
@@ -134,7 +137,7 @@ export const PostForm = () => {
 		const newPost = { ...post }
 		let selectedVal = event.target.value
         console.log('selected val', selectedVal)
-		if (event.target.id.includes("Id")) {
+		if (event.target.id.includes("_id")) {
 			selectedVal = parseInt(selectedVal)
 		}
 		newPost[event.target.id] = selectedVal
@@ -165,8 +168,8 @@ export const PostForm = () => {
 
             <label htmlFor="image">Image URL</label>
             <input 
-                type="text" 
-                id="image" 
+                type="url" 
+                id="image_url" 
                 onChange={handleControlledInputChange} 
                 required
                 value={post.image_url} />
