@@ -121,11 +121,11 @@ import { addPost } from "../modules/PostManager";
 export const PostForm = () => {
 
     const [post, setPost] = useState({
-		userId: 1,
-        categoryId: 1,
+		user_id: 1,
+        category_id: 1,
         title: "",
-		publicationDate: Date.now(),
-		imageURL: "https://vetstreet.brightspotcdn.com/dims4/default/716bb2c/2147483647/thumbnail/645x380/quality/90/?url=https%3A%2F%2Fvetstreet-brightspot.s3.amazonaws.com%2F35%2F7b8bc0c82111e09b940050568d6ceb%2Ffile%2FPointer-1-AP-645km081611.jpg",
+		publication_date: Date.now(),
+		image_url: "",
 		content: "", 
         approved: "",
 	});
@@ -163,13 +163,13 @@ export const PostForm = () => {
                 required
                 value={post.title} />
 
-            {/* <label htmlFor="image">Image URL</label>
+            <label htmlFor="image">Image URL</label>
             <input 
                 type="text" 
                 id="image" 
                 onChange={handleControlledInputChange} 
                 required
-                value={post.imageURL} /> */}
+                value={post.image_url} />
 
             <label htmlFor="content">Content</label>
             <input 
