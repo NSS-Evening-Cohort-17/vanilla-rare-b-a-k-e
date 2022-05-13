@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
+import { Link } from "react-router-dom";
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
 import { useHistory } from 'react-router-dom';
 
 
 export const PostCard = ({post, user, setAllPosts, setUpdatePost}) => {
-
+  const postId = post.id
+  const remoteURL = "http://localhost:8088"
   const history = useHistory();
 
   const handleClick = (method) => {
@@ -18,6 +20,8 @@ export const PostCard = ({post, user, setAllPosts, setUpdatePost}) => {
       history.push('/posts');
     }
   };
+
+
   return (
     <div>PostCard
       <Card>
@@ -29,7 +33,9 @@ export const PostCard = ({post, user, setAllPosts, setUpdatePost}) => {
         />
         <CardBody>
           <CardTitle tag="h5">
+            <Link to={`home/` + post.id}>
             {post.title}
+            </Link>
           </CardTitle>
           <CardSubtitle
             className="mb-2 text-muted"
