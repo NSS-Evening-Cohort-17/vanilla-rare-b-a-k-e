@@ -20,3 +20,9 @@ export const getPostById = (postId) => {
     return fetch(`${remoteURL}/posts/${postId}`)
     .then(response => response.json())
   }
+
+export const deletePost = (id) => {
+    return fetch(`${remoteURL}/posts/${id}`, {
+      method: "DELETE"
+    }).then(result => result.json())
+  }
