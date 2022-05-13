@@ -115,7 +115,7 @@
 
 // PostForm.defaultProps = { post: {} };
 
-import { React, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import { addPost } from "../modules/PostManager";
 
 export const PostForm = () => {

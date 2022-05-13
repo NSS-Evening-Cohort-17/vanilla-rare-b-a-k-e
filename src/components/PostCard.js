@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
+import { useHistory } from 'react-router-dom';
 
-export const PostCard = ({post, user, setAllPosts}) => {
+
+export const PostCard = ({post, user, setAllPosts, setUpdatePost}) => {
+
+  const history = useHistory();
+
+  const handleClick = (method) => {
+    if (method === 'delete') {
+      console.warn('delete');
+      setAllPosts();
+      history.push('/posts');
+    }
+    if (method === 'update') {
+      setUpdatePost(post);
+      history.push('/posts');
+    }
+  };
   return (
     <div>PostCard
       <Card>
@@ -24,10 +40,10 @@ export const PostCard = ({post, user, setAllPosts}) => {
           <CardText>
             {post.content}
           </CardText>
-          <Button onClick={post.id}>
+          <Button onClick={() => handleClick('update')}>
             Edit
           </Button>
-          <Button onClick={setAllPosts}>
+          <Button onClick={() => handleClick('delete')}>
             Delete
           </Button>
         </CardBody>
