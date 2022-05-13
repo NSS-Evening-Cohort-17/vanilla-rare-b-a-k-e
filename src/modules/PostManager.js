@@ -15,3 +15,8 @@ export const getAllPosts = () => {
     return fetch(`${remoteURL}/posts`)
     .then(response => response.json())
 }
+
+export const getPostById = (postId) => {
+    return fetch(`${remoteURL}/posts/${postId}`)
+    .then(response => response.json())
+  }
