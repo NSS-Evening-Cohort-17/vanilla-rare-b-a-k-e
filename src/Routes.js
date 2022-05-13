@@ -15,7 +15,12 @@ export default function Routes({user}) {
       <Route
         exact
         path='/createpost'
-        component={() => <CreatePostView user={user} />}
+        component={() => <CreatePostView/>}
+      />
+      <Route
+        exact
+        path='/editpost'
+        component={() => <EditPostView/>}
       />
       <Route
         path={['/home/:postId', '/:postId']}

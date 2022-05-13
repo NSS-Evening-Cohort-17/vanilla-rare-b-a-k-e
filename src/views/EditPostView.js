@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Form from '../components/Form';
-import { getSingleArtist } from '../api/data/artists';
+import { PostForm } from '../components/PostForm';
+import { getPostById } from '../modules/PostManager';
 
 export default function EditPost() {
-  const [editPost, setEditPost] = useState({});
+  const [editPostObj, setEditPostObj] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
     let isMounted = true;
-    getSinglePost(id).then((post) => {
-      if (isMounted) setEditPost(post);
+    getPostById(id).then((post) => {
+      if (isMounted) setEditPostObj(post);
     });
     return () => {
       isMounted = false;
@@ -19,7 +19,7 @@ export default function EditPost() {
 
   return (
     <>
-      <Form post={editPost} />
+      <PostForm postObj={editPostObj} />
     </>
   );
  }

@@ -22,7 +22,7 @@ export const getPostById = (postId) => {
 }
 
 export const updatePost = (post) => {
-    return fetch(`${remoteURL}/posts/${id}`, {
+    return fetch(`${remoteURL}/posts/${post.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

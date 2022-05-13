@@ -1,170 +1,83 @@
-// import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from "react"
+import PropTypes from 'prop-types';
+import { useHistory } from "react-router-dom";
+import { addPost, updatePost } from "../modules/PostManager";
 
 
-// const initialState = {
-//   id: '',
-//   userId: '',
-//   title: '',
-//   publicationDate: '',
-//   imageUrl: '',
-//   content: '',
-// };
-
-// export default function PostForm({ post }) {
-//   const [formInput, setFormInput] = useState({
-//     ...initialState,
-//   });
-//   const history = useHistory();
-
-//   useEffect(() => {
-//     if (post.id) {
-//       setFormInput({
-//         id: post.id,
-//         userId: post.userId,
-//         title: post.title,
-//         publicationDate: post.publicationDate,
-//         imageUrl: post.imageUrl,
-//         content: post.content,
-//       });
-//     }
-//   }, [post]);
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormInput((prevState) => ({
-//       ...prevState,
-//       [name]: value,
-//     }));
-//   };
-
-//   const resetForm = () => {
-//     setFormInput(initialState);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();f
-//     if (post.id) {
-//       updatePost(formInput).then(() => {
-//         resetForm();
-//         // history.push('/postdetails');
-//       });
-//     } else {
-//       createPost(formInput).then(() => {
-//         resetForm();
-//         // history.push('/postdetails');
-//     });
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <h2 className="form-title">{post.id ? 'EDIT' : 'CREATE A'} POST</h2>
-//       <h5 className="form-title">
-//         {post.id
-//           ? 'Update post below!'
-//           : 'Add post below!'}
-//       </h5>
-//       <input
-//         className="form-control form-control-lg me-1 input"
-//         type="text"
-//         name="title"
-//         id="title"
-//         value={formInput.title}
-//         onChange={handleChange}
-//         placeholder="TITLE"
-//         required
-//       />
-//       <input
-//         className="form-control form-control-lg me-1 input"
-//         type="text"
-//         name="content"
-//         id="content"
-//         value={formInput.content}
-//         onChange={handleChange}
-//         placeholder="Content"
-//         required
-//       />
-//       <input
-//         className="form-control form-control-lg me-1 input"
-//         name="imageUrl"
-//         id="imageUrl"
-//         value={formInput.imageUrl}
-//         onChange={handleChange}
-//         placeholder="Image URL"
-//         required
-//       />
-//       <button className="btn-outline-dark btn-styling" type="submit">
-//         {post.id ? 'UPDATE' : 'SUBMIT'}
-//       </button>
-//     </form>
-//   );
-// }
-
-// PostForm.propTypes = {
-//   post: PropTypes.shape({
-//     id: PropTypes.string,
-//     userId: PropTypes.string,
-//     title: PropTypes.string,
-//     publicationDate: PropTypes.string,
-//     imageUrl: PropTypes.string,
-//     content: PropTypes.string,
-//   }),
-// };
-
-// PostForm.defaultProps = { post: {} };
-
-import React, { useRef, useState } from "react"
-import { addPost } from "../modules/PostManager";
-
-export const PostForm = () => {
+export const PostForm = ({ postObj }) => {
 
     const sessionUserId = localStorage.getItem("rare_userId")
     const userId =  parseInt(sessionUserId)
+    const history = useHistory();
 
-    const [post, setPost] = useState({
+    const [postInput, setPostInput] = useState({
 		user_id: userId,
+        id: "",
         category_id: 1,
         title: "",
 		publication_date: Date.now(),
 		image_url: "",
 		content: "", 
-        approved: "",
+        approved: true,
 	});
 
+    useEffect(() => {
+        if (postObj.id) {
+            setPostInput({
+                user_id: userId,
+                id: postObj.id,
+                category_id: 1,
+                title: postObj.title,
+                publication_date: postObj.publication_date,
+                image_url: postObj.image_url,
+                content: postObj.content, 
+                approved: postObj.approved,
+            });
+        }
+    }, [postObj]);
+
     const handleControlledInputChange = (event) => {
-		const newPost = { ...post }
+		const newPost = { ...postInput }
 		let selectedVal = event.target.value
-        console.log('selected val', selectedVal)
+        console.log(event)
 		if (event.target.id.includes("_id")) {
 			selectedVal = parseInt(selectedVal)
 		}
 		newPost[event.target.id] = selectedVal
         console.log('next selected val', selectedVal)
-		setPost(newPost)
+		setPostInput(newPost)
         console.log('newPost', newPost)
         
 	}
 
     const handleClickSavePost = (event) => {
-		event.preventDefault()  
-        addPost(post)
-            // .then(() => navigate("/"))
-            // .then(() => alert("Post added"))
+		event.preventDefault();
+        if (postObj.id) {
+            updatePost(postInput).then(() => {
+                resetForm();
+                history.push('/');
+            });
+        } else {
+            addPost(postInput).then(() => {
+                resetForm();
+                history.push('/')
+            })
+            
+        }
+
 	}
 
     return (
         <>
-        <form>
-            <h1>Create a new post</h1>
+        <form onSubmit={handleClickSavePost}>
+            <h1>{postObj.id ? 'Edit Post' : 'Create A Post'}</h1>
             <label htmlFor="title">Title</label>
             <input 
                 type="text" 
                 id="title" 
                 onChange={handleControlledInputChange} 
                 required
-                value={post.title} />
+                value={postInput.title} />
 
             <label htmlFor="image">Image URL</label>
             <input 
@@ -172,7 +85,7 @@ export const PostForm = () => {
                 id="image_url" 
                 onChange={handleControlledInputChange} 
                 required
-                value={post.image_url} />
+                value={postInput.image_url} />
 
             <label htmlFor="content">Content</label>
             <input 
@@ -180,13 +93,25 @@ export const PostForm = () => {
                 id="content" 
                 onChange={handleControlledInputChange} 
                 required
-                value={post.content} />    
+                value={postInput.content} />    
 
-            <button 
-                onClick={handleClickSavePost}>
-                Save Post
+            <button className="btn-outline-dark btn-styling" type="submit">
+                {postObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
             </button>    
         </form>
         </>
     )
 }
+PostForm.propTypes ={
+    postObj: PropTypes.shape({
+        user_id: PropTypes.string,
+        id: PropTypes.string,
+        category_id: PropTypes.string,
+        title: PropTypes.string,
+        publication_date: PropTypes.string,
+        image_url: PropTypes.string,
+        content: PropTypes.string, 
+        approved: PropTypes.bool,
+    })
+}
+PostForm.defaultProps = { postObj: {} };

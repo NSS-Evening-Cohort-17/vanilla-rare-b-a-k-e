@@ -33,7 +33,7 @@ export const HomeView = ({user}) => {
         {posts.map((post) => (
             <PostCard
                 key={post.id}
-                post={post}
+                postObj={post}
                 user={user}
                 setAllPosts={setAllPosts}
                 setUpdatePost={setUpdatePost}

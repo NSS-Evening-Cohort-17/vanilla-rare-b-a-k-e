@@ -1,23 +1,22 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from 'reactstrap'
 import { useHistory } from 'react-router-dom';
 
 
-export const PostCard = ({post, user, setAllPosts, setUpdatePost}) => {
-  const postId = post.id
+export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost }) => {
   const remoteURL = "http://localhost:8088"
   const history = useHistory();
 
   const handleClick = (method) => {
     if (method === 'delete') {
       console.warn('delete');
-      setAllPosts();
-      history.push('/posts');
+      history.push('/');
     }
     if (method === 'update') {
-      setUpdatePost(post);
-      history.push('/posts');
+      console.warn('update');
+      setUpdatePost(postObj);
+      history.push('/editpost');
     }
   };
 
@@ -26,15 +25,15 @@ export const PostCard = ({post, user, setAllPosts, setUpdatePost}) => {
     <div>PostCard
       <Card>
         <CardImg
-          alt={`post image ${post.title}`}
-          src={post.image_url}
+          alt={`post image ${postObj.title}`}
+          src={postObj.image_url}
           top
           width="100%"
         />
         <CardBody>
           <CardTitle tag="h5">
-            <Link to={`home/` + post.id}>
-            {post.title}
+            <Link to={`home/` + postObj.id}>
+            {postObj.title}
             </Link>
           </CardTitle>
           <CardSubtitle
@@ -43,15 +42,23 @@ export const PostCard = ({post, user, setAllPosts, setUpdatePost}) => {
           >
             {user.username}
           </CardSubtitle>
-          <CardText>
-            {post.content}
-          </CardText>
-          <Button onClick={() => handleClick('update')}>
+          {/* <CardText>
+            {postObj.content}
+          </CardText> */}
+          <button
+            onClick={() => handleClick('update')}
+            className="btn btn-info"
+            type="button"
+          >
             Edit
-          </Button>
-          <Button onClick={() => handleClick('delete')}>
+          </button>
+          <button
+            onClick={() => handleClick('delete')}
+            className="btn btn-danger"
+            type="button"
+          >
             Delete
-          </Button>
+          </button>
         </CardBody>
       </Card>
     </div>
