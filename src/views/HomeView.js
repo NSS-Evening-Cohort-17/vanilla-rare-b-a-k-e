@@ -20,14 +20,13 @@ export const HomeView = ({user}) => {
     //     // };
     // }, []);
     const getPosts = () => {
-        getAllPosts().then(dataFromAPI => {setAllPosts(dataFromAPI)
-            console.warn(dataFromAPI);
+        return getAllPosts().then(dataFromAPI => {
+            setAllPosts(dataFromAPI)
         });
     };
     
     useEffect(() => {
         getPosts()
-        console.warn(posts);
     }, []);
 
   return (
