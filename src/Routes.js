@@ -1,6 +1,7 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 import CreatePostView from "./views/CreatePostView"
+import MyPostsView from "./views/MyPostsView"
 import PostDetailsView from "./views/PostDetailsView"
 import { HomeView } from "./views/HomeView"
 import EditPostView from "./views/EditPostView"
@@ -22,6 +23,10 @@ export default function Routes({user}) {
         exact
         path='/editpost/:postId'
         component={() => <EditPostView />}
+      />
+      <Route
+        path='/my-posts'
+        component={() => <MyPostsView user={user} />}
       />
       <Route
         path={['/home/:postId', ':postId']}

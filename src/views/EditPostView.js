@@ -23,7 +23,6 @@ export default function EditPostView() {
   return (
     <>
       <PostForm postObj={editPostObj} />
-      <div>'hello'</div>
     </>
   );
  }

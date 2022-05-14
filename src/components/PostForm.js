@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react"
 import PropTypes from 'prop-types';
 import { useHistory } from "react-router-dom";
 import { addPost, updatePost } from "../modules/PostManager";
-
+import "./../style/createpost.css"
 
 export const PostForm = ({ postObj }) => {
+
 
     const sessionUserId = localStorage.getItem("rare_userId")
     const userId =  parseInt(sessionUserId)
@@ -71,33 +72,40 @@ export const PostForm = ({ postObj }) => {
         <>
         <form onSubmit={handleClickSavePost}>
             <h1>{postObj.id ? 'Edit Post' : 'Create A Post'}</h1>
-            <label htmlFor="title">Title</label>
-            <input 
-                type="text" 
-                id="title" 
-                onChange={handleControlledInputChange} 
-                required
-                value={postInput.title} />
-
-            <label htmlFor="image">Image URL</label>
-            <input 
-                type="url" 
-                id="image_url" 
-                onChange={handleControlledInputChange} 
-                required
-                value={postInput.image_url} />
-
-            <label htmlFor="content">Content</label>
-            <input 
-                type="text" 
-                id="content" 
-                onChange={handleControlledInputChange} 
-                required
-                value={postInput.content} />    
-
-            <button className="btn-outline-dark btn-styling" type="submit">
-                {postObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
-            </button>    
+            <div className="form__breaks">
+                <div className="form__break">
+                    <label htmlFor="title">Title</label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        onChange={handleControlledInputChange} 
+                        required
+                        value={postInput.title} />
+                </div>
+                <div className="form__break">
+                    <label htmlFor="image">Image URL</label>
+                    <input 
+                        type="url" 
+                        id="image_url" 
+                        onChange={handleControlledInputChange} 
+                        required
+                        value={postInput.image_url} />
+                </div>
+                <div className="form__break">
+                    <label htmlFor="content">Content</label>
+                    <input 
+                        type="text" 
+                        id="content" 
+                        onChange={handleControlledInputChange} 
+                        required
+                        value={postInput.content} />    
+                </div>
+                <div className="form__break">
+                    <button className="btn-outline-dark btn-styling" type="submit">
+                        {postObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
+                    </button>  
+                </div>  
+            </div>
         </form>
         </>
     )

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from 'reactstrap'
 import { useHistory } from 'react-router-dom';
+import "./../style/postcard.css"
 
 
 export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost }) => {
@@ -22,8 +23,8 @@ export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost }) => {
 
 
   return (
-    <div>PostCard
-      <Card>
+    <div  className='card'>
+      <Card >
         <CardImg
           alt={`post image ${postObj.title}`}
           src={postObj.image_url}
@@ -40,14 +41,14 @@ export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost }) => {
             className="mb-2 text-muted"
             tag="h6"
           >
-            {user.username}
+            {postObj.username}
           </CardSubtitle>
           {/* <CardText>
             {postObj.content}
           </CardText> */}
           <button
             onClick={() => handleClick('update')}
-            className="btn btn-info"
+            className="btn btn-info card__btn"
             type="button"
             id={postObj.id}
           >
@@ -55,10 +56,9 @@ export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost }) => {
           </button>
           <button
             onClick={() => handleClick('delete')}
-            className="btn btn-danger"
+            className="btn btn-danger card__btn"
             type="button"
           >
-            Delete
           </button>
         </CardBody>
       </Card>
