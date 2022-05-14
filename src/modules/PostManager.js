@@ -31,6 +31,13 @@ export const updatePost = (post) => {
     })
         .then(getAllPosts)
 }
+
+export const deletePost = (id) => {
+    return fetch(`${remoteURL}/posts/${id}`, {
+      method: "DELETE"
+    }).then(result => result.json())
+  }
+
 export const getPostsByUser = (userId) => {
     return fetch(`${remoteURL}/my-posts?user_id=${userId}`)
     .then(res => res.json())
