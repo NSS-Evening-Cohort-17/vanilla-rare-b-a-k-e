@@ -3,14 +3,17 @@ import { useParams } from 'react-router-dom';
 import { PostForm } from '../components/PostForm';
 import { getPostById } from '../modules/PostManager';
 
-export default function EditPost() {
+export default function EditPostView() {
   const [editPostObj, setEditPostObj] = useState({});
   const { id } = useParams();
+  console.warn(id);
+  
 
   useEffect(() => {
     let isMounted = true;
     getPostById(id).then((post) => {
       if (isMounted) setEditPostObj(post);
+      console.warn(editPostObj);
     });
     return () => {
       isMounted = false;
@@ -20,6 +23,7 @@ export default function EditPost() {
   return (
     <>
       <PostForm postObj={editPostObj} />
+      <div>'hello'</div>
     </>
   );
  }

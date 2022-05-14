@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom"
 import CreatePostView from "./views/CreatePostView"
 import PostDetailsView from "./views/PostDetailsView"
 import { HomeView } from "./views/HomeView"
+import EditPostView from "./views/EditPostView"
 
 export default function Routes({user}) {
   return(
@@ -19,11 +20,11 @@ export default function Routes({user}) {
       />
       <Route
         exact
-        path='/editpost'
-        component={() => <EditPostView/>}
+        path='/editpost/:postId'
+        component={() => <EditPostView />}
       />
       <Route
-        path={['/home/:postId', '/:postId']}
+        path={['/home/:postId', ':postId']}
         component={() => <PostDetailsView user={user} />}
       />
     </Switch>

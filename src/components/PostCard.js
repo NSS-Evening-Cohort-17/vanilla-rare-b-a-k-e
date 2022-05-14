@@ -14,9 +14,9 @@ export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost }) => {
       history.push('/');
     }
     if (method === 'update') {
-      console.warn('update');
       setUpdatePost(postObj);
-      history.push('/editpost');
+      console.warn('card'+ postObj);
+      history.push(`/editpost/`+ postObj.id);
     }
   };
 
@@ -49,6 +49,7 @@ export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost }) => {
             onClick={() => handleClick('update')}
             className="btn btn-info"
             type="button"
+            id={postObj.id}
           >
             Edit
           </button>
