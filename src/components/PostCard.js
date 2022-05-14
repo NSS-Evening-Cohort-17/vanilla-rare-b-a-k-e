@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
 import { useHistory } from 'react-router-dom';
 import { deletePost } from '../modules/PostManager';
-
 export const PostCard = ({ post, user, setAllPosts, handleClick}) => {
+import "./../style/postcard.css"
 
   const postId = post.id
   const remoteURL = "http://localhost:8088"
@@ -23,9 +23,10 @@ export const PostCard = ({ post, user, setAllPosts, handleClick}) => {
   // };
 
   return (
-    <div>PostCard
-      <Card>
+    <div  className='card'>
+      <Card >
         <CardImg
+          className='card__img'
           alt={`post image ${post.title}`}
           src={post.image_url}
           top
@@ -41,15 +42,16 @@ export const PostCard = ({ post, user, setAllPosts, handleClick}) => {
             className="mb-2 text-muted"
             tag="h6"
           >
-            {user.username}
+            {post.username}
           </CardSubtitle>
           <CardText>
             {post.content}
           </CardText>
-          <Button onClick={post.id}>
+          <Button className='card__btn' onClick={post.id}>
             Edit
           </Button>
           <Button onClick={() => handleClick('delete')}>
+          <Button className='card__btn' onClick={setAllPosts}>
             Delete
           </Button>
         </CardBody>

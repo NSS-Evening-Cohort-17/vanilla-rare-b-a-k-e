@@ -6,29 +6,15 @@ import { deletePost } from '../modules/PostManager';
 export const HomeView = ({user}) => {
     const [posts, setAllPosts] = useState([]);
 
-    // useEffect(() => {
-    //     // let isMounted = true;
-    //     console.warn(`warning 1 ${posts}`);
-    //     getAllPosts().then(setAllPosts)
-    //     console.warn(posts);
-    //         // (postArray) => {
-    //         // // if (isMounted) 
-    //         // setAllPosts(postArray);
-    //     // });
-
-    //     // return () => {
-    //     //     isMounted = false;
-    //     // };
-    // }, []);
     const getPosts = () => {
-        getAllPosts().then(dataFromAPI => {setAllPosts(dataFromAPI)
-            console.warn(dataFromAPI);
+        return getAllPosts().then(dataFromAPI => {
+            setAllPosts(dataFromAPI)
+            
         });
     };
     
     useEffect(() => {
         getPosts()
-        console.warn(posts);
     }, []);
 
     const handleClick = (method, id) => {

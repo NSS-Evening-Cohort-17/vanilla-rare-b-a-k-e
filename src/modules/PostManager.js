@@ -13,7 +13,7 @@ export const addPost = (newPost) => {
 
 export const getAllPosts = () => {
     return fetch(`${remoteURL}/posts`)
-    .then(response => response.json())
+    .then(res => res.json())
 }
 
 export const getPostById = (postId) => {
@@ -26,3 +26,14 @@ export const deletePost = (id) => {
       method: "DELETE"
     }).then(result => result.json())
   }
+export const getPostsByUser = (userId) => {
+    return fetch(`${remoteURL}/my-posts?user_id=${userId}`)
+    .then(res => res.json())
+    
+}
+
+export const getPostById = (id) => {
+    return fetch(`${remoteURL}/posts/${id}`)
+    .then(res => res.json())
+    
+}
