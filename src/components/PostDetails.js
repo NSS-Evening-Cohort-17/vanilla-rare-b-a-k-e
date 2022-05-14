@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { getPostById } from "../modules/PostManager"
 import { getAllUsers } from "../modules/UserManager"
+import "./../style/postdetails.css"
 
 export const PostDetails = () => {
 
@@ -62,9 +63,11 @@ export const PostDetails = () => {
 
     return (
         <> 
+        <div className="details">
         <h3>{post.title}</h3>
         <p>Posted by {author} on {changeDateFormat(post.publication_date)}</p>
         <p>{post.content}</p>
+        </div>
         </>
     )
 }

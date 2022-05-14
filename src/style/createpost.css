@@ -1,0 +1,36 @@
+h1 {
+    text-align: center;
+}
+
+label {
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+input {
+    width: 300px;
+    padding: 3px;
+}
+
+.form__body {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form__breaks {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__btn {
+    background-color: #48c78e;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-left: 175px;
+    width: 150px;
+}
