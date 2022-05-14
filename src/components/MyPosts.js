@@ -2,7 +2,7 @@ import React, { useState, useEffect }  from "react"
 import { getPostsByUser } from "../modules/PostManager"
 import { PostCard } from "./PostCard"
 
-export const MyPosts = ( {user}) => {
+export const MyPosts = ({ user }) => {
 
     const sessionUserId = localStorage.getItem("rare_userId")
     const userId =  parseInt(sessionUserId)
@@ -25,7 +25,7 @@ export const MyPosts = ( {user}) => {
         {myPosts.map((post) => (
             <PostCard
                 key={post.id}
-                post={post}
+                postObj={post}
                 user={user}
                 setMyPosts={setMyPosts}
             />

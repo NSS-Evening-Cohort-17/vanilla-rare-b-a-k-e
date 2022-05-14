@@ -48,17 +48,17 @@ export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost }) => {
           </CardText> */}
           <button
             onClick={() => handleClick('update')}
-            className="btn btn-info card__btn"
+            className="card__btn"
             type="button"
             id={postObj.id}
           >
-            Edit
+            EDIT
           </button>
           <button
             onClick={() => handleClick('delete')}
-            className="btn btn-danger card__btn"
+            className="card__btn"
             type="button"
-          >
+          >DELETE
           </button>
         </CardBody>
       </Card>
