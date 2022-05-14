@@ -31,6 +31,17 @@ export const HomeView = ({user}) => {
         console.warn(posts);
     }, []);
 
+    const handleClick = (method, id) => {
+        if (method === 'delete') {
+          deletePost(id).then(setAllPosts())
+        //   history.push('/');
+        }
+        if (method === 'update') {
+          // setUpdatePost(post);
+        //   history.push('/');
+        }
+      };
+
     
 
   return (
@@ -41,7 +52,7 @@ export const HomeView = ({user}) => {
             post={post}
             user={user}
             setAllPosts={setAllPosts}
-            // setUpdatePost={setUpdatePost}
+            handleClick={handleClick}
             />
         ))}
     </div>

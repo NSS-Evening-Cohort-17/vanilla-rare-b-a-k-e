@@ -4,23 +4,23 @@ import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } fr
 import { useHistory } from 'react-router-dom';
 import { deletePost } from '../modules/PostManager';
 
-export const PostCard = ({ post, user, setAllPosts}) => {
+export const PostCard = ({ post, user, setAllPosts, handleClick}) => {
 
   const postId = post.id
   const remoteURL = "http://localhost:8088"
 
   const history = useHistory();
 
-  const handleClick = (method) => {
-    if (method === 'delete') {
-      deletePost(post.id).then(setAllPosts())
-      history.push('/');
-    }
-    if (method === 'update') {
-      // setUpdatePost(post);
-      history.push('/');
-    }
-  };
+  // const handleClick = (method) => {
+  //   if (method === 'delete') {
+  //     deletePost(post.id).then(setAllPosts())
+  //     history.push('/');
+  //   }
+  //   if (method === 'update') {
+  //     // setUpdatePost(post);
+  //     history.push('/');
+  //   }
+  // };
 
   return (
     <div>PostCard
