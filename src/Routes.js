@@ -4,6 +4,7 @@ import CreatePostView from "./views/CreatePostView"
 import MyPostsView from "./views/MyPostsView"
 import PostDetailsView from "./views/PostDetailsView"
 import { HomeView } from "./views/HomeView"
+import EditPostView from "./views/EditPostView"
 
 export default function Routes({user}) {
   return(
@@ -16,10 +17,14 @@ export default function Routes({user}) {
       <Route
         exact
         path='/createpost'
-        component={() => <CreatePostView user={user} />}
+        component={() => <CreatePostView/>}
       />
       <Route
         exact
+        path='/editpost/:postId'
+        component={() => <EditPostView />}
+      />
+      <Route
         path='/my-posts'
         component={() => <MyPostsView user={user} />}
       />

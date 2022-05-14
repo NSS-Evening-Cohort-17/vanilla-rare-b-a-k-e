@@ -5,18 +5,30 @@ import { deletePost } from '../modules/PostManager';
 
 export const HomeView = ({user}) => {
     const [posts, setAllPosts] = useState([]);
+    const [updatePost, setUpdatePost] = useState({});
 
-    const getPosts = () => {
-        return getAllPosts().then(dataFromAPI => {
-            setAllPosts(dataFromAPI)
-            
-        });
-    };
-    
     useEffect(() => {
-        getPosts()
+        let isMounted = true;
+        // console.warn(`warning 1 ${posts}`);
+        getAllPosts().then((postArray) => {
+            if (isMounted) setAllPosts(postArray);
+        });
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
+    // const getPosts = () => {
+    //     getAllPosts().then(dataFromAPI => {setAllPosts(dataFromAPI)
+    //         console.warn(dataFromAPI);
+    //     });
+    // };
+    
+    // useEffect(() => {
+    //     getAllPosts().then(setAllPosts)
+    //     console.warn(posts);
+    // }, []);
+    
     const handleClick = (method, id) => {
         if (method === 'delete') {
           deletePost(id).then(setAllPosts())
@@ -34,11 +46,12 @@ export const HomeView = ({user}) => {
     <div>
         {posts.map((post) => (
             <PostCard
-            key={post.id}
-            post={post}
-            user={user}
-            setAllPosts={setAllPosts}
-            handleClick={handleClick}
+                key={post.id}
+                postObj={post}
+                user={user}
+                setAllPosts={setAllPosts}
+                setUpdatePost={setUpdatePost}
+                handleClick={handleClick}
             />
         ))}
     </div>

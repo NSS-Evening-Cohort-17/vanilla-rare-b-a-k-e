@@ -19,21 +19,28 @@ export const getAllPosts = () => {
 export const getPostById = (postId) => {
     return fetch(`${remoteURL}/posts/${postId}`)
     .then(response => response.json())
-  }
+}
+
+export const updatePost = (post) => {
+    return fetch(`${remoteURL}/posts/${post.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(post)
+    })
+        .then(getAllPosts)
+}
 
 export const deletePost = (id) => {
     return fetch(`${remoteURL}/posts/${id}`, {
       method: "DELETE"
     }).then(result => result.json())
   }
+
 export const getPostsByUser = (userId) => {
     return fetch(`${remoteURL}/my-posts?user_id=${userId}`)
     .then(res => res.json())
     
 }
 
-export const getPostById = (id) => {
-    return fetch(`${remoteURL}/posts/${id}`)
-    .then(res => res.json())
-    
-}
