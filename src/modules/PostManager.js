@@ -17,7 +17,13 @@ export const getAllPosts = () => {
 }
 
 export const getPostsByUser = (userId) => {
-    return fetch(`${remoteURL}/my-posts&user_id=${userId}`)
+    return fetch(`${remoteURL}/my-posts?user_id=${userId}`)
+    .then(res => res.json())
+    
+}
+
+export const getPostById = (id) => {
+    return fetch(`${remoteURL}/posts/${id}`)
     .then(res => res.json())
     
 }

@@ -11,8 +11,7 @@ export const MyPosts = ( {user}) => {
 
     const getMyPosts = () => {
         getPostsByUser(userId).then(dataFromAPI => {
-            setMyPosts(dataFromAPI)
-            console.log(dataFromAPI)
+                setMyPosts(dataFromAPI)
         });
     }
 

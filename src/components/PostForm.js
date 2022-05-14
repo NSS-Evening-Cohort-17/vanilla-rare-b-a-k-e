@@ -115,8 +115,9 @@
 
 // PostForm.defaultProps = { post: {} };
 
-import { React, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import { addPost } from "../modules/PostManager";
+import "./../style/createpost.css"
 
 export const PostForm = () => {
 
@@ -156,36 +157,44 @@ export const PostForm = () => {
 
     return (
         <>
-        <form>
+        <form className="form__body">
             <h1>Create a new post</h1>
-            <label htmlFor="title">Title</label>
-            <input 
-                type="text" 
-                id="title" 
-                onChange={handleControlledInputChange} 
-                required
-                value={post.title} />
-
-            <label htmlFor="image">Image URL</label>
-            <input 
-                type="url" 
-                id="image_url" 
-                onChange={handleControlledInputChange} 
-                required
-                value={post.image_url} />
-
-            <label htmlFor="content">Content</label>
-            <input 
-                type="text" 
-                id="content" 
-                onChange={handleControlledInputChange} 
-                required
-                value={post.content} />    
-
-            <button 
-                onClick={handleClickSavePost}>
-                Save Post
-            </button>    
+            <div className="form__breaks">
+                <div className="form__break">
+                <label htmlFor="title">Title</label>
+                <input 
+                    type="text" 
+                    id="title" 
+                    onChange={handleControlledInputChange} 
+                    required
+                    value={post.title} />
+                </div>
+                <div className="form__break">
+                <label htmlFor="image">Image URL</label>
+                <input 
+                    type="url" 
+                    id="image_url" 
+                    onChange={handleControlledInputChange} 
+                    required
+                    value={post.image_url} />
+                </div>
+                <div className="form__break">
+                <label htmlFor="content">Content</label>
+                <input 
+                    type="text" 
+                    id="content" 
+                    onChange={handleControlledInputChange} 
+                    required
+                    value={post.content} />    
+                </div> 
+                <div className="form__break"> 
+                <button 
+                    className="form__btn"
+                    onClick={handleClickSavePost}>
+                    Save Post
+                </button> 
+                </div>
+            </div>   
         </form>
         </>
     )
