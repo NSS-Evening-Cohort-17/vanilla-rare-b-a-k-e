@@ -6,7 +6,7 @@ import { deletePost } from '../modules/PostManager';
 import "./../style/postcard.css"
 
 
-export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost, handleClick }) => {
+export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost, handleDeletePost }) => {
   const remoteURL = "http://localhost:8088"
   const history = useHistory();
 
@@ -21,17 +21,6 @@ export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost, handleClic
       history.push(`/editpost/`+ postObj.id);
     }
   };
-
-  // const handleClick = (method) => {
-  //   if (method === 'delete') {
-  //     deletePost(post.id).then(setAllPosts())
-  //     history.push('/');
-  //   }
-  //   if (method === 'update') {
-  //     // setUpdatePost(post);
-  //     history.push('/');
-  //   }
-  // };
 
   return (
     <div  className='card'>
@@ -66,7 +55,8 @@ export const PostCard = ({ postObj, user, setAllPosts, setUpdatePost, handleClic
             EDIT
           </button>
           <button
-            onClick={() => handleClick('delete')}
+            // onClick={() => handleClick('delete')}
+            onClick={() => handleDeletePost(postObj.id)}
             className="card__btn"
             type="button"
           >DELETE

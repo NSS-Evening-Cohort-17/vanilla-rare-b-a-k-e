@@ -7,40 +7,49 @@ export const HomeView = ({user}) => {
     const [posts, setAllPosts] = useState([]);
     const [updatePost, setUpdatePost] = useState({});
 
-    useEffect(() => {
-        let isMounted = true;
-        // console.warn(`warning 1 ${posts}`);
-        getAllPosts().then((postArray) => {
-            if (isMounted) setAllPosts(postArray);
+    // useEffect(() => {
+    //     let isMounted = true;
+    //     // console.warn(`warning 1 ${posts}`);
+    //     getAllPosts().then((postArray) => {
+    //         if (isMounted) setAllPosts(postArray);
+    //     });
+    //     return () => {
+    //         isMounted = false;
+    //     };
+    // }, []);
+
+    const getPosts = () => {
+        getAllPosts().then((dataFromAPI) => {setAllPosts(dataFromAPI)
+            console.warn(dataFromAPI);
         });
-        return () => {
-            isMounted = false;
-        };
+    };
+    
+    useEffect(() => {
+        // getAllPosts().then(setAllPosts)
+        getPosts()
     }, []);
 
-    // const getPosts = () => {
-    //     getAllPosts().then(dataFromAPI => {setAllPosts(dataFromAPI)
-    //         console.warn(dataFromAPI);
-    //     });
-    // };
-    
     // useEffect(() => {
-    //     getAllPosts().then(setAllPosts)
-    //     console.warn(posts);
-    // }, []);
+    //   getAllPosts().then((dataFromAPI) => {setAllPosts(dataFromAPI);
+    //   });
+    // }, [])
     
-    const handleClick = (method, id) => {
-        if (method === 'delete') {
-          deletePost(id).then(setAllPosts())
-        //   history.push('/');
-        }
-        if (method === 'update') {
-          // setUpdatePost(post);
-        //   history.push('/');
-        }
-      };
+    // const handleClick = (method, id) => {
+    //     if (method === 'delete') {
+    //       deletePost(id).then(setAllPosts())
+    //     //   history.push('/');
+    //     }
+    //     if (method === 'update') {
+    //       // setUpdatePost(post);
+    //     //   history.push('/');
+    //     }
+    //   };
 
-    
+    const handleDeletePost = (id) => {
+      deletePost(id)
+      .then(() => getAllPosts().then(setAllPosts))
+      .then(() => window.location.reload());
+  }
 
   return (
     <div>
@@ -51,7 +60,7 @@ export const HomeView = ({user}) => {
                 user={user}
                 setAllPosts={setAllPosts}
                 setUpdatePost={setUpdatePost}
-                handleClick={handleClick}
+                handleDeletePost={handleDeletePost}
             />
         ))}
     </div>

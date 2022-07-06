@@ -51,16 +51,22 @@ export const PostForm = ({ postObj }) => {
         
 	}
 
+    // const resetForm = () => {
+    //     setFormInput(initialState);
+    //     setEditItem({});
+    //   };
+    
+
     const handleClickSavePost = (event) => {
 		event.preventDefault();
         if (postObj.id) {
             updatePost(postInput).then(() => {
-                resetForm();
+                // resetForm();
                 history.push('/');
             });
         } else {
             addPost(postInput).then(() => {
-                resetForm();
+                // resetForm();
                 history.push('/')
             })
             
@@ -101,7 +107,7 @@ export const PostForm = ({ postObj }) => {
                         value={postInput.content} />    
                 </div>
                 <div className="form__break">
-                    <button className="btn-outline-dark btn-styling" type="submit">
+                    <button className="btn-outline-dark btn-styling form__btn" type="submit">
                         {postObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
                     </button>  
                 </div>  
